@@ -1,0 +1,17 @@
+plugins {
+    id 'groovy'
+}
+
+group 'de.vogler'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.5.8'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
