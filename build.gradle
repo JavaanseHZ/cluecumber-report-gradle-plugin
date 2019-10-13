@@ -2,7 +2,7 @@ plugins {
     id 'groovy'
 }
 
-group 'de.vogler'
+group 'de.javaansehz'
 version '0.0.1-SNAPSHOT'
 
 repositories {
@@ -13,5 +13,6 @@ repositories {
 dependencies {
     implementation gradleApi()
     implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.5.8'
+    implementation group: 'com.trivago.rta', name: 'cluecumber-report-plugin', version: '2.2.0'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
