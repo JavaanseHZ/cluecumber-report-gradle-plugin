@@ -1,11 +1,17 @@
 plugins {
     id 'groovy'
+    id 'maven-publish'
+    id 'java-gradle-plugin'
+//    id 'de.javaansehz.cluecumber-report-gradle-plugin' version '0.0.2-SNAPSHOT'
 }
 
+//apply plugin: CluecumberReport
+
 group 'de.javaansehz'
-version '0.0.1-SNAPSHOT'
+version '0.0.2-SNAPSHOT'
 
 repositories {
+    mavenLocal()
     mavenCentral()
     jcenter()
 }
@@ -14,5 +20,41 @@ dependencies {
     implementation gradleApi()
     implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.5.8'
     implementation group: 'com.trivago.rta', name: 'cluecumber-report-plugin', version: '2.2.0'
+    //runtime group: 'javax.inject', name: javax.inject, version:	'1'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
+
+gradlePlugin {
+    plugins {
+        cluecumberReportGradlePlugin {
+            id = 'de.javaansehz.cluecumber-report-gradle-plugin'
+            implementationClass = 'de.javaansehz.CluecumberReport'
+        }
+    }
+}
+
+publishing {
+    repositories {
+        mavenLocal()
+    }
+}
+
+//pluginManagement {
+//    repositories {
+//        mavenLocal()
+//        gradlePluginPortal()
+//        mavenCentral()
+//        jcenter()
+//    }
+//}
+
+//publications {
+//    maven(MavenPublication) {
+//        from components.groovy
+//    }
+//}
+
+//cluecumberReports {
+//    sourceJsonReportDirectory = "json/"
+//    generatedHtmlReportDirectory "build/"
+//}

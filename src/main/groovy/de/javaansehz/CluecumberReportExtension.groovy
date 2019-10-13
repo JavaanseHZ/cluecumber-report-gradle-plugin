@@ -15,7 +15,7 @@ class CluecumberReportExtension {
     /**
      * Custom parameters to add to the report.
      */
-    LinkedHashMap<String, String> customParameters
+    Map<String, String> customParameters = new LinkedHashMap<>()
 
     /**
      * Path to a properties file. The included properties are converted to custom parameters and added to the others.
@@ -78,5 +78,9 @@ class CluecumberReportExtension {
     String logLevel
 
     boolean skip
+
+    def customParameters(String name, String value) {
+        customParameters.put(name, value)
+    }
 
 }
