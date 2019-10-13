@@ -1,27 +1,49 @@
 package de.javaansehz
 
 import com.trivago.cluecumber.exceptions.CluecumberPluginException
+import com.trivago.cluecumber.filesystem.FileIO
+import com.trivago.cluecumber.filesystem.FileSystemManager
+import com.trivago.cluecumber.json.JsonPojoConverter
 import com.trivago.cluecumber.json.pojo.Report
+import com.trivago.cluecumber.json.processors.ElementIndexPreProcessor
 import com.trivago.cluecumber.logging.CluecumberLogger
+import com.trivago.cluecumber.properties.PropertyManager
+import com.trivago.cluecumber.rendering.ReportGenerator
 import com.trivago.cluecumber.rendering.pages.pojos.pagecollections.AllScenariosPageCollection
 import org.gradle.api.DefaultTask
 
+import javax.inject.Inject
 import java.nio.file.Path
 
 class CluecumberReportTask extends DefaultTask {
 
+    @Inject
+    final CluecumberLogger ccLogger
+    @Inject
+    final PropertyManager propertyManager
+    @Inject
+    final FileSystemManager fileSystemManager
+    @Inject
+    final FileIO fileIO
+    @Inject
+    final JsonPojoConverter jsonPojoConverter
+    @Inject
+    final ElementIndexPreProcessor elementIndexPreProcessor
+    @Inject
+    final ReportGenerator reportGenerator
+
     CluecumberReportTask() throws CluecumberPluginException {
         doLast() {
-            if (extension.skip) {
-                logger.info("Cluecumber report generation was skipped using the <skip> property.",
+            if (propertyManager.skip) {
+                ccLogger.info("Cluecumber report generation was skipped using the <skip> property.",
                         DEFAULT)
                 return
             }
 
-            logger.logInfoSeparator(DEFAULT)
-            logger.info(String.format(" Cluecumber Report Maven Plugin, version %s", getClass().getPackage()
+            ccLogger.logInfoSeparator(DEFAULT)
+            ccLogger.info(String.format(" Cluecumber Report Maven Plugin, version %s", getClass().getPackage()
                     .getImplementationVersion()), DEFAULT)
-            logger.logInfoSeparator(DEFAULT, COMPACT)
+            ccLogger.logInfoSeparator(DEFAULT, COMPACT)
 
             // Create attachment directory here since they are handled during json generation.
             fileSystemManager.createDirectory(propertyManager.getGeneratedHtmlReportDirectory() + "/attachments")
@@ -34,12 +56,12 @@ class CluecumberReportTask extends DefaultTask {
                     Report[] reports = jsonPojoConverter.convertJsonToReportPojos(jsonString)
                     allScenariosPageCollection.addReports(reports)
                 } catch (CluecumberPluginException e) {
-                    logger.warn("Could not parse JSON in file '" + jsonFilePath.toString() + "': " + e.getMessage())
+                    ccLogger.warn("Could not parse JSON in file '" + jsonFilePath.toString() + "': " + e.getMessage())
                 }
             }
             elementIndexPreProcessor.addScenarioIndices(allScenariosPageCollection.getReports())
             reportGenerator.generateReport(allScenariosPageCollection)
-            logger.info(
+            ccLogger.info(
                     "=> Cluecumber Report: " + propertyManager.getGeneratedHtmlReportDirectory() + "/" +
                             PluginSettings.SCENARIO_SUMMARY_PAGE_PATH + PluginSettings.HTML_FILE_EXTENSION,
                     DEFAULT,
