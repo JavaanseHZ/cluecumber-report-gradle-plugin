@@ -24,7 +24,7 @@ class CluecumberReport implements Plugin<Project>  {
         Task reportTask = project.task('generateCluecumberReports', type: CluecumberReportTask) {
             description = "Creates cucumber html reports"
             group = "Cucumber reports"
-            projectName = project.displayName
+            //projectName = project.displayName
         }
 
         reportTask.onlyIf { !project.hasProperty('skip') }

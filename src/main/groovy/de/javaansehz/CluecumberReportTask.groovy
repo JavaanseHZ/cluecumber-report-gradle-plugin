@@ -1,5 +1,6 @@
 package de.javaansehz
 
+import com.trivago.cluecumber.constants.PluginSettings
 import com.trivago.cluecumber.exceptions.CluecumberPluginException
 import com.trivago.cluecumber.filesystem.FileIO
 import com.trivago.cluecumber.filesystem.FileSystemManager
@@ -36,14 +37,14 @@ class CluecumberReportTask extends DefaultTask {
         doLast() {
             if (propertyManager.skip) {
                 ccLogger.info("Cluecumber report generation was skipped using the <skip> property.",
-                        DEFAULT)
+                        CluecumberLogger.CluecumberLogLevel.DEFAULT)
                 return
             }
 
-            ccLogger.logInfoSeparator(DEFAULT)
+            ccLogger.logInfoSeparator(CluecumberLogger.CluecumberLogLevel.DEFAULT)
             ccLogger.info(String.format(" Cluecumber Report Maven Plugin, version %s", getClass().getPackage()
-                    .getImplementationVersion()), DEFAULT)
-            ccLogger.logInfoSeparator(DEFAULT, COMPACT)
+                    .getImplementationVersion()), CluecumberLogger.CluecumberLogLevel.DEFAULT)
+            ccLogger.logInfoSeparator(CluecumberLogger.CluecumberLogLevel.DEFAULT, CluecumberLogger.CluecumberLogLevel.COMPACT)
 
             // Create attachment directory here since they are handled during json generation.
             fileSystemManager.createDirectory(propertyManager.getGeneratedHtmlReportDirectory() + "/attachments")
@@ -64,8 +65,8 @@ class CluecumberReportTask extends DefaultTask {
             ccLogger.info(
                     "=> Cluecumber Report: " + propertyManager.getGeneratedHtmlReportDirectory() + "/" +
                             PluginSettings.SCENARIO_SUMMARY_PAGE_PATH + PluginSettings.HTML_FILE_EXTENSION,
-                    DEFAULT,
-                    COMPACT,
+                    CluecumberLogger.CluecumberLogLevel.DEFAULT,
+                    CluecumberLogger.CluecumberLogLevel.COMPACT,
                     CluecumberLogger.CluecumberLogLevel.MINIMAL
             )
         }
