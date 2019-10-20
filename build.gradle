@@ -1,33 +1,23 @@
-buildscript {
-    ext {
-        guiceModule = 'de.javaansehz.AppModule'
-    }
-}
-
 plugins {
     id 'groovy'
     id 'maven-publish'
     id 'java-gradle-plugin'
-    id 'de.javaansehz.cluecumber-report-gradle-plugin' version '0.0.8-SNAPSHOT'
+    id 'de.javaansehz.cluecumber-report-gradle-plugin' version '1.0.0-SNAPSHOT'
 }
 
 group 'de.javaansehz'
-version '0.0.8-SNAPSHOT'
+version '1.0.0-SNAPSHOT'
 
 repositories {
     mavenLocal()
     mavenCentral()
     jcenter()
-    maven {
-        url "https://plugins.gradle.org/m2/"
-    }
 }
 
 dependencies {
     implementation gradleApi()
     implementation group: 'com.google.inject', name: 'guice', version: '4.2.2'
     implementation group: 'org.reflections', name: 'reflections', version: '0.9.11'
-    compile group: 'gradle.plugin.com.chrisgahlert', name: 'gradle-guice-plugin', version: '0.4.0'
     implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.5.8'
     implementation group: 'com.trivago.rta', name: 'cluecumber-report-plugin', version: '2.2.0'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
@@ -49,6 +39,6 @@ publishing {
 }
 
 cluecumberReports {
-    sourceJsonReportDirectory = "/home/ben/dev/cluecumber-report-gradle-plugin/json"
-    generatedHtmlReportDirectory = "/home/ben/dev/cluecumber-report-gradle-plugin/build"
+    sourceJsonReportDirectory = "$project.projectDir/json"
+    generatedHtmlReportDirectory = "$project.buildDir/reports"
 }

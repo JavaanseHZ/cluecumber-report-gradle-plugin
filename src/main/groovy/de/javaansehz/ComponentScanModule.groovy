@@ -18,15 +18,10 @@ class ComponentScanModule extends AbstractModule {
     @Override
     void configure() {
         Reflections packageReflections = new Reflections(packageName)
-        for (bA in bindingAnnotations) {
-            def with = packageReflections.getTypesAnnotatedWith(bA)
-            for (a in with) {
-                bind(a)
+        bindingAnnotations.each { bA ->
+            packageReflections.getTypesAnnotatedWith(bA).each { type ->
+                bind(type)
             }
         }
-//        bindingAnnotations.stream()
-//                .map {it -> packageReflections.getTypesAnnotatedWith(it)}
-//                .flatMap {it.map(Stream.&of)}
-//                .forEach {it -> bind(it)}
     }
 }

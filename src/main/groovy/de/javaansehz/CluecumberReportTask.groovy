@@ -1,7 +1,6 @@
 package de.javaansehz
 
-import com.chrisgahlert.gradleguiceplugin.GradleInjector
-import com.trivago.cluecumber.constants.PluginSettings
+import com.google.inject.Guice
 import com.trivago.cluecumber.exceptions.CluecumberPluginException
 import com.trivago.cluecumber.filesystem.FileIO
 import com.trivago.cluecumber.filesystem.FileSystemManager
@@ -13,6 +12,7 @@ import com.trivago.cluecumber.properties.PropertyManager
 import com.trivago.cluecumber.rendering.ReportGenerator
 import com.trivago.cluecumber.rendering.pages.pojos.pagecollections.AllScenariosPageCollection
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.TaskAction
 
 import javax.inject.Inject
 import java.nio.file.Path
@@ -35,43 +35,43 @@ class CluecumberReportTask extends DefaultTask {
     ReportGenerator reportGenerator
 
     CluecumberReportTask() throws CluecumberPluginException {
-        GradleInjector.inject(getProject(), this)
-        doLast() {
-//            if (propertyManager.skip) {
-//                ccLogger.info("Cluecumber report generation was skipped using the <skip> property.",
-//                        CluecumberLogger.CluecumberLogLevel.DEFAULT)
-//                return
-//            }
-//
-//            ccLogger.logInfoSeparator(CluecumberLogger.CluecumberLogLevel.DEFAULT)
-//            ccLogger.info(String.format(" Cluecumber Report Maven Plugin, version %s", getClass().getPackage()
-//                    .getImplementationVersion()), CluecumberLogger.CluecumberLogLevel.DEFAULT)
-//            ccLogger.logInfoSeparator(CluecumberLogger.CluecumberLogLevel.DEFAULT, CluecumberLogger.CluecumberLogLevel.COMPACT)
-
-            // Create attachment directory here since they are handled during json generation.
-            fileSystemManager.createDirectory(propertyManager.getGeneratedHtmlReportDirectory() + "/attachments")
-
-            AllScenariosPageCollection allScenariosPageCollection = new AllScenariosPageCollection(propertyManager.getCustomPageTitle())
-            List<Path> jsonFilePaths = fileSystemManager.getJsonFilePaths(propertyManager.getSourceJsonReportDirectory())
-            for (Path jsonFilePath : jsonFilePaths) {
-                String jsonString = fileIO.readContentFromFile(jsonFilePath.toString())
-                try {
-                    Report[] reports = jsonPojoConverter.convertJsonToReportPojos(jsonString)
-                    allScenariosPageCollection.addReports(reports)
-                } catch (CluecumberPluginException e) {
-                    ccLogger.warn("Could not parse JSON in file '" + jsonFilePath.toString() + "': " + e.getMessage())
-                }
-            }
-            elementIndexPreProcessor.addScenarioIndices(allScenariosPageCollection.getReports())
-            reportGenerator.generateReport(allScenariosPageCollection)
-//            ccLogger.info(
-//                    "=> Cluecumber Report: " + propertyManager.getGeneratedHtmlReportDirectory() + "/" +
-//                            PluginSettings.SCENARIO_SUMMARY_PAGE_PATH + PluginSettings.HTML_FILE_EXTENSION,
-//                    CluecumberLogger.CluecumberLogLevel.DEFAULT,
-//                    CluecumberLogger.CluecumberLogLevel.COMPACT,
-//                    CluecumberLogger.CluecumberLogLevel.MINIMAL
-//            )
-        }
+        def injector = Guice.createInjector(new CluecumberModule())
+        injector.injectMembers(this)
     }
 
+    @TaskAction
+    void run() {
+        initParameters()
+        fileSystemManager.createDirectory(propertyManager.getGeneratedHtmlReportDirectory() + "/attachments")
+        AllScenariosPageCollection allScenariosPageCollection = new AllScenariosPageCollection(propertyManager.getCustomPageTitle())
+        List<Path> jsonFilePaths = fileSystemManager.getJsonFilePaths(propertyManager.getSourceJsonReportDirectory())
+        for (Path jsonFilePath : jsonFilePaths) {
+            String jsonString = fileIO.readContentFromFile(jsonFilePath.toString())
+            try {
+                Report[] reports = jsonPojoConverter.convertJsonToReportPojos(jsonString)
+                allScenariosPageCollection.addReports(reports)
+            } catch (CluecumberPluginException e) {
+                ccLogger.warn("Could not parse JSON in file '" + jsonFilePath.toString() + "': " + e.getMessage())
+            }
+        }
+        elementIndexPreProcessor.addScenarioIndices(allScenariosPageCollection.getReports())
+        reportGenerator.generateReport(allScenariosPageCollection)
+    }
+
+    void initParameters() {
+        def extensionParams = project.extensions.cluecumberReports
+        propertyManager.setSourceJsonReportDirectory(extensionParams.sourceJsonReportDirectory)//("/home/ben/dev/cluecumber-report-gradle-plugin/json")
+        propertyManager.setGeneratedHtmlReportDirectory(extensionParams.generatedHtmlReportDirectory)//("/home/ben/dev/cluecumber-report-gradle-plugin/build")
+        propertyManager.setCustomParametersFile(extensionParams.customParametersFile)
+        propertyManager.setFailScenariosOnPendingOrUndefinedSteps(extensionParams.failScenariosOnPendingOrUndefinedSteps)
+        propertyManager.setExpandBeforeAfterHooks(extensionParams.expandBeforeAfterHooks)
+        propertyManager.setExpandStepHooks(extensionParams.expandStepHooks)
+        propertyManager.setExpandDocStrings(extensionParams.expandDocStrings)
+        propertyManager.setCustomCssFile(extensionParams.customCss)
+        propertyManager.setCustomStatusColorPassed(extensionParams.customStatusColorPassed)
+        propertyManager.setCustomStatusColorFailed(extensionParams.customStatusColorFailed)
+        propertyManager.setCustomStatusColorSkipped(extensionParams.customStatusColorSkipped)
+        propertyManager.setCustomPageTitle(extensionParams.customPageTitle)
+        
+    }
 }
