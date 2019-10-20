@@ -24,7 +24,7 @@ class CluecumberReportExtension {
      * My_Custom_Parameter2=This is another value
      * </pre>
      */
-    private String customParametersFile
+    String customParametersFile
 
     /**
      * Mark scenarios as failed if they contain pending or undefined steps (default: false).
@@ -54,7 +54,7 @@ class CluecumberReportExtension {
     /**
      * Custom hex color for passed scenarios (e.g. '#00ff00')'.
      */
-    private String customStatusColorPassed;
+    String customStatusColorPassed
 
     /**
      * Custom hex color for failed scenarios (e.g. '#ff0000')'.
