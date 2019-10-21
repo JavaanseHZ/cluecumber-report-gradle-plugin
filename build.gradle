@@ -3,10 +3,17 @@ plugins {
     id 'maven-publish'
     id 'java-gradle-plugin'
     id "com.gradle.plugin-publish" version "0.10.1"
+    id "de.gliderpilot.semantic-release" version "1.4.0"
 }
 
 group 'de.javaansehz'
-version '1.0.1'
+
+project.ext.ghToken = project.hasProperty('ghToken') ? project.getProperty('ghToken') : System.getenv('GH_TOKEN') ?: null
+semanticRelease {
+    repo {
+        ghToken = project.ghToken
+    }
+}
 
 repositories {
     mavenCentral()
