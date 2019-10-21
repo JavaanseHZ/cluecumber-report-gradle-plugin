@@ -22,7 +22,7 @@ stages:
   - name: github-release
     if: branch = master
   - name: publish-plugin
-    if: branch = ~ ^v[0-9]+\.[0-9]+\.[0-9]+)
+    if: (branch = ~ ^v[0-9]+\.[0-9]+\.[0-9]+)
 
 jobs:
   include:
