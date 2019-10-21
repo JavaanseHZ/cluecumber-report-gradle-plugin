@@ -1,7 +1,28 @@
 # Cluecumber Report Gradle Plugin
-Gradle Plugin Wrapper for [Cluecumber Report Maven Plugin](https://github.com/trivago/cluecumber-report-plugin) 
+## Description
+Gradle Plugin Wrapper for [Cluecumber Report Maven Plugin](https://github.com/trivago/cluecumber-report-plugin)
 
 Based on https://github.com/trivago/cluecumber-report-plugin
+
+## Usage
+
+### Add the following lines to build.gradle
+
+```
+plugins {
+    id 'de.javaansehz.cluecumber-report-gradle-plugin'
+}
+
+cluecumberReports {
+    sourceJsonReportDirectory = [path-to-cucumber-json-files]
+    generatedHtmlReportDirectory = [path-for-generated-reports]
+}
+```
+
+### Build Task
+```
+generateCluecumberReports
+```
 
 ## License
 
