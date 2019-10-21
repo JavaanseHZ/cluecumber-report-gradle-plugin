@@ -13,6 +13,9 @@ semanticRelease {
     repo {
         ghToken = project.ghToken
     }
+    releaseBranches {
+        include 'master'
+    }
 }
 
 repositories {

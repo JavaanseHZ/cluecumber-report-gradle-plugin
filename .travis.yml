@@ -14,9 +14,9 @@ before_install:
 stages:
   - name: build
   - name: release
-      if: branch = master
+    if: (branch = master) AND ($TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+)
   - name: publish
-    if: branch = master
+    if: (branch = master) AND ($TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+)
 
 jobs:
   include:
