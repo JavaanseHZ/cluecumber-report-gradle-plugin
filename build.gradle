@@ -2,23 +2,20 @@ plugins {
     id 'groovy'
     id 'maven-publish'
     id 'java-gradle-plugin'
-    id 'de.javaansehz.cluecumber-report-gradle-plugin' version '1.0.0-SNAPSHOT'
+    id "com.gradle.plugin-publish" version "0.10.1"
 }
 
 group 'de.javaansehz'
-version '1.0.0-SNAPSHOT'
+version '1.0.0'
 
 repositories {
-    mavenLocal()
     mavenCentral()
     jcenter()
 }
 
 dependencies {
-    implementation gradleApi()
     implementation group: 'com.google.inject', name: 'guice', version: '4.2.2'
     implementation group: 'org.reflections', name: 'reflections', version: '0.9.11'
-    implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.5.8'
     implementation group: 'com.trivago.rta', name: 'cluecumber-report-plugin', version: '2.2.0'
 }
 
@@ -37,7 +34,15 @@ publishing {
     }
 }
 
-cluecumberReports {
-    sourceJsonReportDirectory = "$project.projectDir/json"
-    generatedHtmlReportDirectory = "$project.buildDir/reports"
+pluginBundle {
+    website = 'https://github.com/JavaanseHZ/cluecumber-report-gradle-plugin'
+    vcsUrl = 'https://github.com/JavaanseHZ/cluecumber-report-gradle-plugin'
+    description = 'Gradle Wrapper for https://github.com/trivago/cluecumber-report-plugin.'
+    plugins {
+        cucumberReportsPlugin {
+            id = 'de.javaansehz.cluecumber-report-gradle-plugin'
+            displayName = 'Gradle cluecumber reporting'
+            tags = ['cucumber', 'reports', "test"]
+        }
+    }
 }
