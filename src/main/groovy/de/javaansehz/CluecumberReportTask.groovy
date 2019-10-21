@@ -34,13 +34,13 @@ class CluecumberReportTask extends DefaultTask {
     @Inject
     ReportGenerator reportGenerator
 
-    CluecumberReportTask() throws CluecumberPluginException {
+    CluecumberReportTask() {
         def injector = Guice.createInjector(new CluecumberModule())
         injector.injectMembers(this)
     }
 
     @TaskAction
-    void run() {
+    void run() throws CluecumberPluginException {
         initParameters()
         fileSystemManager.createDirectory(propertyManager.getGeneratedHtmlReportDirectory() + "/attachments")
         AllScenariosPageCollection allScenariosPageCollection = new AllScenariosPageCollection(propertyManager.getCustomPageTitle())

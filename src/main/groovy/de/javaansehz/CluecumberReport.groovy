@@ -15,6 +15,5 @@ class CluecumberReport implements Plugin<Project> {
             group = "Cucumber reports"
         }
         reportTask.onlyIf { !extensionParams.skip }
-
     }
 }
