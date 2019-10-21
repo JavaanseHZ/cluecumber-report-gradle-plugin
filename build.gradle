@@ -39,7 +39,7 @@ pluginBundle {
     vcsUrl = 'https://github.com/JavaanseHZ/cluecumber-report-gradle-plugin'
     description = 'Gradle Wrapper for https://github.com/trivago/cluecumber-report-plugin.'
     plugins {
-        cucumberReportsPlugin {
+        cluecumberReportGradlePlugin {
             id = 'de.javaansehz.cluecumber-report-gradle-plugin'
             displayName = 'Gradle cluecumber reporting'
             tags = ['cucumber', 'reports', "test"]
