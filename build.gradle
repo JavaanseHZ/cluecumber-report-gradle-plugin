@@ -56,3 +56,6 @@ pluginBundle {
         }
     }
 }
+
+if (!version.toString().endsWith('-SNAPSHOT'))
+    publish.dependsOn publishPlugins
