@@ -25,7 +25,7 @@ class CluecumberReportTest extends Specification {
         cluecumberReportTask = project.task('generateCluecumberReports', type: CluecumberReportTask)
     }
 
-    def "Example Report testreport"() {
+    def "Generate Example Report 'testreport.json'"() {
         when:
         cluecumberReportTask.run()
         then:

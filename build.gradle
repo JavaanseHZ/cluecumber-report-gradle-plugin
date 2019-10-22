@@ -41,6 +41,13 @@ gradlePlugin {
     }
 }
 
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut"
+        exceptionFormat "full"
+    }
+}
+
 publishing {
     repositories {
         mavenLocal()
