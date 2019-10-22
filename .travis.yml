@@ -21,7 +21,7 @@ stages:
   - name: compile-sources
   - name: testing
   - name: publish-release
-    if: branch = master
+    if: branch = master AND type = push AND fork = false
 
 jobs:
   include:
