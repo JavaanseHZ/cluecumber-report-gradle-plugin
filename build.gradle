@@ -43,7 +43,7 @@ gradlePlugin {
 
 test {
     testLogging {
-        events "passed", "skipped", "failed"
+        events "passed", "skipped", "failed", "standardOut"
         exceptionFormat "full"
     }
 }
