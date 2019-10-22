@@ -1,3 +1,4 @@
+![build status](https://travis-ci.com/JavaanseHZ/cluecumber-report-gradle-plugin.svg?branch=master)
 # Cluecumber Report Gradle Plugin
 ## Description
 Gradle Plugin Wrapper for [Cluecumber Report Maven Plugin](https://github.com/trivago/cluecumber-report-plugin)

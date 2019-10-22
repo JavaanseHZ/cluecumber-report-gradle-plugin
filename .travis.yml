@@ -18,14 +18,17 @@ before_install:
   - git checkout -qf $TRAVIS_BRANCH
 
 stages:
-  - name: build
+  - name: compile-sources
+  - name: testing
   - name: publish-release
     if: branch = master
 
 jobs:
   include:
-    - stage: build
-      script: ./gradlew build
+    - stage: compile-sources
+      script: ./gradlew compileGroovy
+    - stage: testing
+      script: ./gradlew test
     - stage: publish-release
       script: ./gradlew release -Dorg.ajoberstar.grgit.auth.username=${GH_TOKEN} -Dorg.ajoberstar.grgit.auth.password -Pgradle.publish.key=$GRADLE_PUBLISH_KEY -Pgradle.publish.secret=$GRADLE_PUBLISH_SECRET
   
