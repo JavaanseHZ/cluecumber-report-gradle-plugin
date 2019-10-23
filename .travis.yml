@@ -33,8 +33,7 @@ jobs:
       script: ./gradlew release -Dorg.ajoberstar.grgit.auth.username=${GH_TOKEN} -Dorg.ajoberstar.grgit.auth.password -Pgradle.publish.key=$GRADLE_PUBLISH_KEY -Pgradle.publish.secret=$GRADLE_PUBLISH_SECRET
 
 after_success:
-  - echo "Test Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
-  - bash <(curl -s https://codecov.io/bash) -v
+  - test $TRAVIS_JOB_NAME = 'testing' &&  bash <(curl -s https://codecov.io/bash) -v
 
 
 before_cache:
