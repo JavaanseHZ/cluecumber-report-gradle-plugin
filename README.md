@@ -1,6 +1,6 @@
 [![Apache V2 License](http://img.shields.io/badge/license-Apache%20V2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Build Status](https://travis-ci.com/JavaanseHZ/cluecumber-report-gradle-plugin.svg?branch=master)](https://travis-ci.com/JavaanseHZ/cluecumber-report-gradle-plugin)
-[![codecov](https://codecov.io/gh/JavaanseHZ/cluecumber-report-gradle-plugin/branch/master/graph/badge.svg)]](https://codecov.io/gh/JavaanseHZ/cluecumber-report-gradle-plugin)
+[![codecov](https://codecov.io/gh/JavaanseHZ/cluecumber-report-gradle-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/JavaanseHZ/cluecumber-report-gradle-plugin)
 # Cluecumber Report Gradle Plugin
 ## Description
 Gradle Plugin Wrapper for [Cluecumber Report Maven Plugin](https://github.com/trivago/cluecumber-report-plugin)
