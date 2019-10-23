@@ -1,9 +1,8 @@
+[![Apache V2 License](http://img.shields.io/badge/license-Apache%20V2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 ![build status](https://travis-ci.com/JavaanseHZ/cluecumber-report-gradle-plugin.svg?branch=master)
 # Cluecumber Report Gradle Plugin
 ## Description
 Gradle Plugin Wrapper for [Cluecumber Report Maven Plugin](https://github.com/trivago/cluecumber-report-plugin)
-
-Based on https://github.com/trivago/cluecumber-report-plugin
 
 ## Usage
 
@@ -19,6 +18,7 @@ cluecumberReports {
     generatedHtmlReportDirectory = [path-for-generated-reports]
 }
 ```
+For optional parameters, please consult the [README at the original Maven Plugin](https://github.com/trivago/cluecumber-report-plugin/blob/master/README.md#optional-configuration-parameters).
 
 ### Build Task
 ```
