@@ -15,7 +15,7 @@ class CluecumberReportTest extends Specification {
     Project project = ProjectBuilder.builder().build()
 
     def basePath =  Paths.get(".").toAbsolutePath().toString()
-    def reportPath = "$basePath/build/reports/"
+    def reportPath = "$basePath/build/test/"
     def sourcePath = "$basePath/src/test/resources/"
 
     def setup() {
