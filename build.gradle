@@ -4,6 +4,7 @@ plugins {
     id 'java-gradle-plugin'
     id "com.gradle.plugin-publish" version "0.10.1"
     id "de.gliderpilot.semantic-release" version "1.4.0"
+    id 'jacoco'
 }
 
 group 'de.javaansehz'
@@ -45,6 +46,13 @@ test {
     testLogging {
         events "passed", "skipped", "failed", "standardOut"
         exceptionFormat "full"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
     }
 }
 
