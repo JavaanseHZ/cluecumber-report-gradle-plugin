@@ -60,8 +60,8 @@ class CluecumberReportTask extends DefaultTask {
 
     void initParameters() {
         def extensionParams = project.extensions.cluecumberReports
-        propertyManager.setSourceJsonReportDirectory(extensionParams.sourceJsonReportDirectory)//("/home/ben/dev/cluecumber-report-gradle-plugin/json")
-        propertyManager.setGeneratedHtmlReportDirectory(extensionParams.generatedHtmlReportDirectory)//("/home/ben/dev/cluecumber-report-gradle-plugin/build")
+        propertyManager.setSourceJsonReportDirectory(extensionParams.sourceJsonReportDirectory)
+        propertyManager.setGeneratedHtmlReportDirectory(extensionParams.generatedHtmlReportDirectory)
         propertyManager.setCustomParametersFile(extensionParams.customParametersFile)
         propertyManager.setFailScenariosOnPendingOrUndefinedSteps(extensionParams.failScenariosOnPendingOrUndefinedSteps)
         propertyManager.setExpandBeforeAfterHooks(extensionParams.expandBeforeAfterHooks)

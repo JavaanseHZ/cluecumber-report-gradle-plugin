@@ -18,9 +18,9 @@ class ComponentScanModule extends AbstractModule {
     @Override
     void configure() {
         Reflections packageReflections = new Reflections(packageName)
-        bindingAnnotations.each { bA ->
-            packageReflections.getTypesAnnotatedWith(bA).each { type ->
-                bind(type)
+        bindingAnnotations.each {
+            bA -> packageReflections.getTypesAnnotatedWith(bA).each {
+                type -> bind(type)
             }
         }
     }
