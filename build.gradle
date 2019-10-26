@@ -37,6 +37,8 @@ gradlePlugin {
     plugins {
         cluecumberReportGradlePlugin {
             id = 'de.javaansehz.cluecumber-report-gradle-plugin'
+            displayName = 'Cluecumber Report Plugin Gradle Wrapper'
+            description = 'Gradle Wrapper for https://github.com/trivago/cluecumber-report-plugin.'
             implementationClass = 'de.javaansehz.CluecumberReport'
         }
     }
@@ -64,7 +66,7 @@ publishing {
 
 pluginBundle {
     website = 'https://github.com/JavaanseHZ/cluecumber-report-gradle-plugin'
-    vcsUrl = 'https://github.com/JavaanseHZ/cluecumber-report-gradle-plugin'
+    vcsUrl = 'https://github.com/JavaanseHZ/cluecumber-report-gradle-plugin.git'
     description = 'Gradle Wrapper for https://github.com/trivago/cluecumber-report-plugin.'
     plugins {
         cluecumberReportGradlePlugin {
