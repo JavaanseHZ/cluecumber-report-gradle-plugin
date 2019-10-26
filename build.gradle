@@ -71,7 +71,7 @@ pluginBundle {
     plugins {
         cluecumberReportGradlePlugin {
             id = 'de.javaansehz.cluecumber-report-gradle-plugin'
-            displayName = 'Gradle cluecumber reporting'
+            displayName = 'Cluecumber Report Plugin Gradle Wrapper'
             tags = ['cucumber', 'reports', "test"]
         }
     }
