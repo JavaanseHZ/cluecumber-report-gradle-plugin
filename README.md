@@ -11,7 +11,7 @@ Gradle Plugin Wrapper for [Cluecumber Report Maven Plugin](https://github.com/tr
 
 ```
 plugins {
-    id 'de.javaansehz.cluecumber-report-gradle-plugin'
+    id 'de.javaansehz.cluecumber-report-gradle-plugin' version "1.1.4" 
 }
 
 cluecumberReports {
@@ -25,6 +25,10 @@ For optional parameters, please consult the [README at the original Maven Plugin
 ```
 generateCluecumberReports
 ```
+
+## Example
+A minimal example can be found here:
+https://github.com/JavaanseHZ/cluecumber-report-gradle-plugin-example
 
 ## License
 
