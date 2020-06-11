@@ -15,5 +15,6 @@ class CluecumberReportExtension {
     String customStatusColorSkipped
     String customPageTitle
     boolean skip
+    String startPage
 
 }
