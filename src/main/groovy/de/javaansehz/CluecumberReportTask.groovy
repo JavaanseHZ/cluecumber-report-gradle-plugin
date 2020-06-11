@@ -72,6 +72,6 @@ class CluecumberReportTask extends DefaultTask {
         propertyManager.setCustomStatusColorFailed(extensionParams.customStatusColorFailed)
         propertyManager.setCustomStatusColorSkipped(extensionParams.customStatusColorSkipped)
         propertyManager.setCustomPageTitle(extensionParams.customPageTitle)
-        
+        propertyManager.setStartPage(Optional.ofNullable(extensionParams.startPage).orElse("ALL_SCENARIOS"))
     }
 }
