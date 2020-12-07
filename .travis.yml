@@ -21,9 +21,9 @@ stages:
   - name: compile-sources
   - name: testing
   - name: release
-    if: branch = master AND type = push AND fork = false AND type NOT IN (pull_request)
+    if: branch = master AND type = push AND fork = false
   - name: publish
-    if: branch = master AND type = push AND fork = false AND type NOT IN (pull_request)
+    if: branch = master AND type = push AND fork = false
 
 jobs:
   include:
@@ -32,7 +32,7 @@ jobs:
     - stage: testing
       script: ./gradlew test jacocoTestReport
     - stage: release-publish
-      script: ./gradlew release -Dorg.ajoberstar.grgit.auth.username=${GH_TOKEN} -Dorg.ajoberstar.grgit.auth.password -Pgradle.publish.key=$GRADLE_PUBLISH_KEY -Pgradle.publish.secret=$GRADLE_PUBLISH_SECRET
+      script: 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then ./gradlew release -Dorg.ajoberstar.grgit.auth.username=${GH_TOKEN} -Dorg.ajoberstar.grgit.auth.password -Pgradle.publish.key=$GRADLE_PUBLISH_KEY -Pgradle.publish.secret=$GRADLE_PUBLISH_SECRET; fi'
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -v
