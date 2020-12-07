@@ -27,7 +27,7 @@ repositories {
 dependencies {
     implementation group: 'com.google.inject', name: 'guice', version: '4.2.3'
     implementation group: 'org.reflections', name: 'reflections', version: '0.9.11'
-    implementation group: 'com.trivago.rta', name: 'cluecumber-report-plugin', version: '2.5.0'
+    implementation group: 'com.trivago.rta', name: 'cluecumber-report-plugin', version: '2.6.1'
     testCompile (group: 'org.spockframework', name: 'spock-core', version: '1.3-groovy-2.5') {
         exclude module: "groovy-all"
     }
